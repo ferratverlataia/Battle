@@ -18,11 +18,16 @@ public:
 		std::cout << "Health: " << Health << std::endl;
 		std::cout << "Attack: " << Damage << std::endl;
 		std::cout << "Defense: " << Defense << std::endl;
+		std::cout << std::endl;
 	}
 
 	void SetHealth(int newhealth) 
 	{
 		Health = newhealth;
+		if (Health < 0) 
+		{
+			Health = 0;
+		}
 	}
 	std::string GetName()
 	{
@@ -52,7 +57,7 @@ private:
 class Battle 
 {
 public:
-	void InitiateBattle(Character A, Character B) 
+	void InitiateBattle(Character &A, Character &B) 
 	{
 		
 		std::cout << "--InitialState--" << std::endl;
@@ -64,14 +69,14 @@ public:
 
 	}
 	
-	void ShowFinalBattleStats(Character A, Character B) 
+	void ShowFinalBattleStats(Character &A, Character &B) 
 	{
 		std::cout << "--Final State--" << std::endl;
 		A.DisplayInformation();
 		B.DisplayInformation();
 	}
 protected:
-	void Fight(Character A, Character B)
+	void Fight(Character &A, Character &B)
 	{
 		std::cout << A.GetName() << " attacks " << B.GetName() << "!" << std::endl;
 		std::cout << B.GetName() << " Receives  " << A.GetDamage() - B.GetDefense() << " of damage!" << std::endl;
